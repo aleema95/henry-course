@@ -2,7 +2,7 @@
 
 function BinarioADecimal(num) {
   // tu codigo aca
-  var arr = num.split('')
+  var arr = num.split('');
   var rev = arr.reverse();
   var suma = 0;
   let i = 0;
