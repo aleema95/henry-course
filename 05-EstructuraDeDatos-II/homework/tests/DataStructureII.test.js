@@ -134,7 +134,7 @@ describe('HashTable', function() {
     expect(typeof hashTable.hasKey).toBe('function');
   });
 
-  it('deberia `hash` correctament', function() {
+  it('deberia `hash` correctamente', function() {
     // esta funcion hasheadora deberia sumar los key code de las letras de la palabra,
     // y hacer el mod de ese numero por el numero de buckets .
     expect(hashTable.hash('foo')).toBe(9);
