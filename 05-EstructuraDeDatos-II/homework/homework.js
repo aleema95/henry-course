@@ -40,16 +40,16 @@ LinkedList.prototype.remove = function(){
   let current = this.head; //agregamos el head a la variable current
   if(!this.head) return null; // checkeamos si existe this.head
   if(this.head.next === null){ // checkeamos si existe un nodo
-    var remove = current.data; // guardamos el valor que voy a eliminar en una variable
+    let remove = current.value; // guardamos el valor que voy a eliminar en una variable
     this.head = null; // Eliminamos el contenido de head
     this._length--; // aumentamos en uno el valor de this._length
     return remove; // devolvemos la data actual
   };
 
   while(current.next.next){ //Checkeamos el 2do hacia adelante tiene un nodo
-    current = current.next //Actualizamos el nodo actual al siguiente
+    let current = current.next //Actualizamos el nodo actual al siguiente
   }
-  var remove = current.next.data
+  let remove = current.next.value
   current.next = null
   this._length--;
   return remove;
@@ -61,19 +61,19 @@ LinkedList.prototype.search = function(data){
 
   while(current !== null){
     if(typeof data === "function"){
-      if(data(current.data) === true){
-          return current.data;
+      if(data(current.value) === true){
+          return current.value;
       }
-    } else if(data === current.data) {
-      return current.data;
+    } else if(data === current.value) {
+      return current.value;
     }
     current = current.next
   }
   return null;
 }
 
-function Node(value) {
-  this.data = value;
+function Node(valor) {
+  this.value = valor;
   this.next = null;
 }
 
@@ -93,26 +93,38 @@ Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero
 */
 
 function HashTable() {
-  let obj = {};
-  this.numBuckets = 35
-  this.hash = function(key){
-    var sumaPosicion = 0;
-      for(let i=0; i < key.length; i++){
-        sumaPosicion += key.charCodeAt(i)
-      }
-     return sumaPosicion % this.numBuckets
-  }
-  this.set = function(key, value){
-    if(typeof(key) !== 'string') throw new TypeError('Keys must be strings');
-    obj[this.hash(key)] = value    
-  }
-  this.get = function(key){
-    return obj[this.hash(key)]
-  }
-  this.hasKey = function(key) {
-    return obj[this.hash(key)] !== undefined
-  }
+  this.buckets = [];
+  this.numBuckets = 35;
 }
+ // - hasKey: recibe una clave por parámetro y consulta si ya hay algo almacenado en la tabla con esa clave (retorna un booleano).
+HashTable.prototype.hasKey = function(key) {
+  let b = this.hash(key);
+  return this.buckets[b].hasOwnProperty(key);
+}
+
+HashTable.prototype.hash = function(key){
+  var sumaPosicion = 0;
+    for(let i=0; i < key.length; i++){
+      sumaPosicion += key.charCodeAt(i)
+    }
+   return sumaPosicion % this.numBuckets
+}
+
+HashTable.prototype.set = function(key, value){
+  if(typeof key !== 'string') throw new TypeError('Keys must be strings');
+
+  let b = this.hash(key)
+
+  if(this.buckets[b] === undefined){
+    this.buckets[b] = {};
+  }
+
+  this.buckets[b][key] = value;
+}
+HashTable.prototype.get = function(key){
+  let b = this.hash(key)
+  return this.buckets[b][key];
+} 
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
