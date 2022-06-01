@@ -25,21 +25,17 @@ function bubbleSort(array) {
   // Devolver el array ordenado resultante
   // Tu código:
   let a = 0;
-  let b = 0;  
 
     for(let i = 0; i < array.length; i++){
       for (let j = i + 1; j < array.length; j++) {
         if(array[i] > array[j]){
-            a = array[i];
-            b = array[j];
-          array[i] = b;
-          array[j] = a;
+            a = array[i]
+            array[i] = array[j]
+            array[j] = a
         }
       }
     }
-    console.log(array);
    return array
-
 
     // solucion de martina--------------------------------------------------------
   //  let swap = true;
@@ -62,6 +58,12 @@ function insertionSort(array) {
   // el array recibido como parámetro utilizando arreglos
   // Devolver el array ordenado resultante
   // Tu código:
+
+  //[20,13,1,58,40,78]
+  //     i
+  //  j
+  //
+
   for(let i = 1; i < array.length; i++){
     let j = i - 1;
     let vg = array[i];
@@ -79,6 +81,17 @@ function selectionSort(array) {
   // el array recibido como parámetro utilizando dos arreglos
   // Devolver el array ordenado resultante
   // Tu código:
+  // 0    1   2  3  <<<<<< indices
+  //[10, -2,  -7, 4]
+  //  M
+  //  i
+  //      j
+
+  // i = 0
+  // min.index = 0
+  // min.value = 10
+
+
    for (let i = 0; i < array.length - 1; i++) {
      let min = i;
      for (let j = i + 1; j < array.length; j++){
