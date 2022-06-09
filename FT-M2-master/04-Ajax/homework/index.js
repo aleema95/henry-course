@@ -35,3 +35,5 @@ $('#delete').click(function(){
         console.log(response);
     })
 });
+
+// asdf
